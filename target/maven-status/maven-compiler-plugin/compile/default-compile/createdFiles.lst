@@ -1,0 +1,9 @@
+mainPackage\App.class
+app\fakeApi\IFakeApi.class
+app\service\IRegister.class
+app\core\Result.class
+app\fakeApi\FakeApi.class
+app\service\Login.class
+app\service\Register.class
+app\entities\User.class
+app\service\ILogin.class
