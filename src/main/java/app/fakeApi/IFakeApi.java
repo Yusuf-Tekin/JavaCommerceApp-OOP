@@ -5,6 +5,7 @@
 package app.fakeApi;
 
 import app.core.Result;
+import app.entities.Product;
 import app.entities.User;
 import java.util.ArrayList;
 
@@ -22,6 +23,13 @@ public interface IFakeApi {
     public Result LoginRequest(String username,String password);
     public Result UserLoggedInControl(String username);
     public ArrayList<User> allUsers();
+    
+    
+    public Result SaveProduct(Product product);
+    public Result UpdateProduct(Product product,int productId);
+    public Result DeleteProduct(int productId);
+    
+    public ArrayList<Product> allProducts();
     
     
 }

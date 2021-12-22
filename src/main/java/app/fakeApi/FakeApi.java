@@ -5,6 +5,7 @@
 package app.fakeApi;
 
 import app.core.Result;
+import app.entities.Product;
 import app.entities.User;
 import java.util.ArrayList;
 
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 public class FakeApi implements IFakeApi{
 
     private ArrayList<User> users;
+    private ArrayList<Product> products;
     
     public FakeApi(){
         users = new ArrayList();
+        products = new ArrayList();
     }
     
     
@@ -101,6 +104,60 @@ public class FakeApi implements IFakeApi{
     @Override
     public ArrayList<User> allUsers() {
         return users;
+    }
+
+    @Override
+    public Result SaveProduct(Product product) {
+        products.add(product);
+        return new Result("Ürün başarıyla eklendi.",true);
+    }
+
+    @Override
+    public Result UpdateProduct(Product product, int productId) {
+        boolean isProduct = false;
+        for(Product p : products){
+            if(p.getId() == productId){
+                p.setPrice(product.getPrice());
+                p.setProductName(product.getProductName());
+                p.setProductImage(product.getProductImage());
+                p.setProductCategoryId(product.getProductCategoryId());
+                isProduct = true;
+                break;
+            }
+        }
+        if(isProduct){
+            return new Result("Ürün güncellendi.",isProduct);
+        }
+        return new Result("Ürün bulunamadı..",isProduct);
+        
+
+    }
+
+    @Override
+    public Result DeleteProduct(int productId) {
+        boolean isProductDelete = false;
+        
+        for(Product product:products){
+            if(product.getId() == productId){
+                isProductDelete = true;
+                products.remove(products.indexOf(product));
+                break;
+            }
+        }
+        
+        if(isProductDelete){
+            return new Result("Ürün silindi.", isProductDelete);
+        }
+        return new Result("Ürün bulunamadığı için silinemedi.", isProductDelete);
+                    
+        
+    
+    
+    }
+
+    @Override
+    public ArrayList<Product> allProducts() {
+        return products;
     }
     
     
